@@ -1,6 +1,6 @@
 const {errorHandler} = require('../utils/error.handle');
  
-const getItems = async(res, req) => {
+const getItems = async(req, res) => {
     try {
         res.send('IT WORKS BROOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     }catch(e) {
