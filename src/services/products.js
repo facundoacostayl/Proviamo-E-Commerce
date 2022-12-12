@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-const {oAuth2Client, sheets} = require('../src/config/oAuth2client');
+const {oAuth2Client, sheets} = require('../config/oAuth2client');
 
 const getProducts = async() => {
     const response = await sheets.spreadsheets.values.get({
