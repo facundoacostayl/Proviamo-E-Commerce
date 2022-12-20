@@ -4,5 +4,7 @@ require('dotenv').config();
 
 // Credentials
 mercadopago.configure({
-  access_token: process.env.DB_ACCESS_TOKEN,
+  access_token: process.env.MP_ACCESS_TOKEN_TEST,
 });
+
+module.exports = mercadopago;
