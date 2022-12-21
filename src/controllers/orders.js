@@ -1,4 +1,4 @@
-const {getOrders, addOrders, getOrderId} = require('../services/orders');
+const {getOrders, addOrders, getOrderId, updateOrders, getOrderStatus} = require('../services/orders');
 const {errorHandler} = require('../utils/error.handle');
 
 const getItems = async(req, res) => {
@@ -10,11 +10,21 @@ const getItems = async(req, res) => {
 const addItems = async({body}, res) => {
     try {
         const response = await getOrderId(body);
-        //await addOrders(body, response);
+        await addOrders(body, response);
         res.send({response});
     }catch(e) {
         errorHandler(res, e.message, 400);
     }
 }
 
-module.exports = {getItems, addItems};
+const updateItems = async(req, res) => {
+    try {
+        const response = await getOrderStatus();
+        await updateOrders(response.preferenceId, response.status);
+        res.sendFile(require.resolve("./frontend/index.html"));
+    }catch(e) {
+        errorHandler(res, e.message, 400);
+    }
+}
+
+module.exports = {getItems, addItems, updateItems};

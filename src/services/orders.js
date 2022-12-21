@@ -21,12 +21,11 @@ const getOrders = async () => {
 };
 
 const addOrders = async (order, preferenceId) => {
-
   order.date = new Date().toISOString();
   order.preferenceId = preferenceId;
   order.status = "Pendiente";
   const orders = await getOrders();
-  orders.push(order.items);  
+  orders.push(order.items);
 
   let values = orders.map((order) => [
     order.preferenceId,
@@ -55,9 +54,9 @@ const getOrderId = async (order) => {
   let preference = {
     items: [],
     back_urls: {
-      success: "http://localhost:3000/feedback",
-      failure: "http://localhost:3000/feedback",
-      pending: "http://localhost:3000/feedback",
+      success: "http://localhost:3000/orders/feedback",
+      failure: "http://localhost:3000/orders/feedback",
+      pending: "http://localhost:3000/orders/feedback",
     },
     auto_return: "approved",
   };
@@ -80,4 +79,28 @@ const getOrderId = async (order) => {
   const orders = await getOrders();*/
 };
 
-module.exports = { getOrders, addOrders, getOrderId };
+const updateOrders = async (preferenceId, status) => {
+  const orders = await readOrders();
+  const order = orders.find((o) => o.preferenceId === preferenceId);
+  order.status = status;
+  await writeOrders(orders);
+};
+
+const getOrderStatus = async () => {
+  const payment = await mercadopago.payment.findById(req.query.payment_id);
+  const merchantOrder = await mercadopago.merchant_orders.findById(
+    payment.body.order.id
+  );
+  const preferenceId = merchantOrder.body.preference_id;
+  const status = payment.body.status;
+
+  return {preferenceId, status};
+};
+
+module.exports = {
+  getOrders,
+  addOrders,
+  getOrderId,
+  updateOrders,
+  getOrderStatus,
+};
