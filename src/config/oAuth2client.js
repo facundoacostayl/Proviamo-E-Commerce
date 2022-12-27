@@ -9,9 +9,9 @@ const oAuth2Client = new google.auth.OAuth2(
 
 oAuth2Client.setCredentials({
     access_token:
-        process.env.DB_ACCESS_TOKEN,
+    "ya29.a0ARrdaM_EM_niCJQ3U62J-15KQWIue9IsA4pQztPkPl_go1xDhxUVZQpjMngHfGUQmtPSK7z32xFZYpT6WAxgU5N2QWJevON979IxZZRp3Nwp2OCDBmF7jb4WWl5qp28Z3qiveCRVioRp3px_TusfNI_8omLr",
     refresh_token:
-        process.env.DB_REFRESH_TOKEN,
+    "1//0hc_kJL1tV92gCgYIARAAGBESNwF-L9IrphAB_mkC1Wj5R_uYd6ZaepJ4iVFjnxCkpyHdIa68-Q89QvsDkh74tzoxgbRxncAZCvo",
     scope: "https://www.googleapis.com/auth/spreadsheets",
     token_type: "Bearer",
     expiry_date: 1641929044877,

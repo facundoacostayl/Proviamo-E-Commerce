@@ -8,6 +8,7 @@ const getOrders = async () => {
     range: "Orders!A2:E",
   });
 
+  //STRUGGLING HERE
   const rows = response.data.values || [];
   const orders = rows.map((row) => ({
     preferenceId: row[0],
