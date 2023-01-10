@@ -1,0 +1,150 @@
+
+.product__description {
+    display: flex;
+    flex-direction: column;
+}
+
+.description__h1 {
+    margin-top: 10rem;
+    color: black;
+}
+
+.description__image img {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.description__title {
+    margin: 20px 0 15px 0;
+}
+
+.description__title h2{
+    color: black;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.description__price span {
+    color: rgb(97, 96, 96);
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+
+.add__to__cart {
+    margin: 30px 0;
+}
+
+.description__btn {
+    border: 1px solid black;
+    padding: 1rem 2rem;
+}
+
+.add__to__cart a {
+    font-size: 1.2rem;
+}
+
+.add__to__cart i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.the__description {
+    text-align: justify;
+    padding: 0 1rem;
+    margin: 50px auto 20px auto;
+    max-width: 500px;
+
+}
+
+.the__description p{
+    color: gray;
+}
+
+.description__counter {
+    margin: 25px 0 45px 0;
+}
+
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px;
+    min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    }
+
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+/*
+.minus:hover{
+    background-color: #717fe0 !important;
+}
+
+.plus:hover{
+    background-color: #717fe0 !important;
+}
+*/
+/*Prevent text selection*/
+input{  
+    border: 0;
+    width: 2%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input:disabled{
+    background-color:white;
+}
+   
+
+@media screen and (min-width: 768px) {
+
+    .description__h1 {
+        margin-top: 9rem;
+        color: black;
+        font-family: sans-serif;
+    }
+
+    .product__description {
+        flex-direction: row;
+        padding: 2rem;
+    }
+
+    .description__title {
+        max-width: 300px;
+        margin: 20px auto 15px auto;
+    }
+
+    .the__description {
+        max-width: 350px;
+    }
+}
