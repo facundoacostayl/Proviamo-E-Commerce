@@ -21,13 +21,13 @@ const getOrders = async () => {
   return orders;
 };
 
-const addOrders = async (order, preferenceId) => {
-  order.date = new Date().toISOString();
-  order.preferenceId = preferenceId;
-  order.status = "Pendiente";
+const addOrders = async (body, preferenceId) => {
+  body.date = new Date().toISOString();
+  body.preferenceId = preferenceId;
+  body.status = "Pendiente";
 
   const orders = await getOrders();
-  /* is this correct? => */ orders.push(order.items);
+  /* is this correct? => */ orders.push(body); /*or body.items instead of body ? */
 
   let values = orders.map((order) => [
     order.preferenceId,
