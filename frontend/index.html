@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Styles-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!--Icons-->
+    <script src="https://kit.fontawesome.com/b95ba2cf7a.js" crossorigin="anonymous"></script>
+    <!--Scripts-->
+
+    <script defer src="js/shop.js"></script>
+    <script defer src="js/fetch.js"></script>
+    <script defer src="js/main.js"></script>
+    
+
+    <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+    <!--Title-->
+
+    <title>Almacen Gourmet</title>
+</head>
+
+<body>
+    <!--Header-->
+    <header class="l-header" id="header">
+        <nav class="nav bd-grid">
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fas fa-bars" id="grid-link"></i>
+                <p class="menu__html">Menu</p>
+            </div>
+            <div class="nav__logo">
+                <a href="/index.html"><img src="img/imgonline-com-ua-Negative-MUZq5lOZt9qIB1xp.jpg" alt="logo"></a>
+            </div>
+            <div class="nav__menu" id="nav-menu">
+                <div class="close__button">
+                    <p id="remove-menu" class="back__to__shop">X</p>
+                </div>
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li class="nav__item arrow__li">
+                        <p id="arrow-button" class="arrow__nav__link">Productos <i
+                                class="fas fa-long-arrow-alt-down"></i></p>
+                    </li>
+                    <ul class="nav__products__menu">
+                        <li class="products__menu__item">
+                            <a href="shop.html">Picadas</a>
+                        </li>
+                        <li class="products__menu__item">
+                            <a href="canastas.html">Cajas y Canastas</a>
+                        </li>
+                        <li class="products__menu__item">
+                            <a href="giftcards.html">Giftcards</a>
+                        </li>
+                        <li class="products__menu__item">
+                            <a href="importados.html">Importados</a>
+                        </li>
+                        <li class="products__menu__item">
+                            <a href="qatar.html">Promos Qatar 2022</a>
+                        </li>
+                    </ul>
+                    <li class="nav__item"><a href="reunion.html" class="nav__link">Armá tu reunion</a></li>
+                    <li class="nav__item"><a href="aboutus.html" class="nav__link">Sobre nosotros + Contacto</a></li>
+                </ul>
+            </div>
+            <div class="nav__shop" id="nav-shop">
+                <p class="menu__html">Carrito</p>
+                <i class="fas fa-shopping-bag" id="shoppingBag"></i>
+                <p style="display: none;" id="shoppingBagNumber" class="cart__preview"></p>
+            </div>
+
+
+        </nav>
+        <div id="menu-overlay"></div>
+    </header>
+
+
+
+    <!--Home-->
+
+    <div class="slider__container">
+        <div class="image__item">
+            <div class="img img__1"></div>
+            <div class="img__text img__text__1">
+                <h1>descubri</h1>
+                <p>productos gourmet regionales e importados</p>
+            </div>
+        </div>
+        <div class="image__item">
+            <div class="img img__2"></div>
+            <div class="img__text img__text__2">
+                <h1>CONOCE NUESTRAS PICADAS</h1>
+                <p>pasá a nuestro e-Shop y pedí la tuya</p>
+            </div>
+        </div>
+        <div class="image__item">
+            <div class="img img__3"></div>
+            <div class="img__text img__text__3">
+                <h1>Fiambres y Quesos</h1>
+                <p>selección de primera calidad</p>
+            </div>
+        </div>
+        <div class="arrows">
+            <div id="arrow-left" class="arrow arrow__left"></div>
+            <div id="arrow-right" class="arrow arrow__right"></div>
+        </div>
+    </div>
+
+    <section class="section">
+        <h1 class="section-title">Nuestros Productos</h1>
+        <div class="column__list">
+            <a href="shop.html">
+                <div class="column__item__1">
+                    <div class="img__transition">
+                        <div class="item__img">
+                            <img src="img/IMG-20210304-WA0013.jpg" alt="picadas">
+                        </div>
+                        <div class="item__description__1">
+                            <h3>Picadas</h3>
+                            <p>descubri tu picada ideal</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="flex__column">
+                <a href="canastas.html">
+                    <div class="column__item__2">
+                        <div class="img__transition">
+                            <div class="item__img">
+                                <img class="blur" src="img/IMG-20210304-WA0008.jpg" alt="canastas">
+                            </div>
+                            <div class="item__description__2">
+                                <h3>Cajas y Canastas</h3>
+                                <p>elegí el mejor regalo</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="shop.html">
+                    <div class="column__item__3">
+                        <div class="img__transition">
+                            <div class="item__img">
+                                <img class="blur" src="img/IMG-20210304-WA0012.jpg" alt="quesos y fiambres">
+                            </div>
+                            <div class="item__description__3">
+                                <h3>Quesos y fiambres</h3>
+                                <p>seleccion de primera calidad</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--Mini Shop-->
+
+    <section class="mini__shop section">
+        <h2 class="section-title">Visita nuestro e-Shop (envíos CABA y TakeAway)</h2>
+        <div class="products">
+            <ul class="product__list">
+                <li class="shop__product__item" data-id="7">
+                    <a id="item-image" class="image__link"><img class="item__image" src="./img/IMG-20210304-WA0004.jpg"
+                            alt="Picada Don Benjamin Grande"></a>
+                    <a id="addToCart" class="addToCart"><i id="add-icon" class="fas fa-shopping-bag"></i></a>
+                    <a class="item__title">Picada Don Benjamin Grande</a>
+                    <p class="item__price">$9790</p>
+                </li>
+                <li class="shop__product__item" data-id="5">
+                    <a id="item-image" class="image__link"><img class="item__image" src="./img/IMG-20210304-WA0002.jpg"
+                            alt="Picada Quesos Grande"></a>
+                    <a id="addToCart" class="addToCart"><i id="add-icon" class="fas fa-shopping-bag"></i></a>
+                    <a class="item__title">Picada de Quesos Grande</a>
+                    <p class="item__price">$8500</p>
+                </li>
+                <li class="shop__product__item" data-id="9">
+                    <a id="item-image" class="image__link"><img class="item__image" src="./img/IMG-20210304-WA0010.jpg"
+                            alt="Picada Fiambres Grande"></a>
+                    <a id="addToCart" class="addToCart"><i id="add-icon" class="fas fa-shopping-bag"></i></a>
+                    <a class="item__title">Picada Fiambres Grande</a>
+                    <p class="item__price">$8250</p>
+                </li>
+            </ul>
+        </div>
+        <div class="full__shop">
+            <a href="shop.html" class="btn__ver__todo ver__todo">VER TODO</a>
+        </div>
+    </section>
+
+    <!--SUCURSALES-->
+
+    <!-- <section class="nuestras__sucursales">
+        <h2 class="section-title-2">Nuestras Sucursales y horarios de atención:</h2>
+        <div class="sucursal__container">
+            <div class="sucursal__1">
+                <div class="sucursal__img sucursal__img__1"></div>
+                <div class="sucursal__overlay">
+
+                    <div class="sucursal__text__container">
+                    
+                    <div class="sucursal__text sucursal__text__1 selected">
+                        <p><i class="fas fa-map-marker-alt"></i>Maipu 384</p>
+                        <p><i class="fas fa-phone"></i>5351-0890</p>
+                        <a class="whatsapp__sucursal" href="https://api.whatsapp.com/send?phone=393456789715"><i
+                            class="fab fa-whatsapp whatsapp__sucursal"></i style=>+541155693984</a>
+                        <p class="sucursal__horarios">Lun. a Vie. de 10 a 20:00hs</p>
+                        <p class="sucursal__horarios">Sab. de 10:30 a 15hs</p>
+                        <div class="ver__en__maps">
+                            <a class="maps__btn"
+                             target="_blank"
+                             href="https://www.google.com.ar/maps/place/Maip%C3%BA+867,+C1006ACK+CABA/@-34.5979838,-58.3789315,17z/data=!3m1!4b1!4m5!3m4!1s0x95bccaca2f87ab15:0xcf11488140c0c027!8m2!3d-34.5979882!4d-58.3767428">
+                             Ver en Maps</a>
+                        </div>
+                    </div>
+                   
+                    <div class="sucursal__text sucursal__text__2">
+                        <p><i class="fas fa-map-marker-alt"></i>Araoz 2797</p>
+                        <p><i class="fas fa-phone"></i>4836-4324</p>
+                        <a class="whatsapp__sucursal" href="https://api.whatsapp.com/send?phone=393456789715"><i
+                            class="fab fa-whatsapp whatsapp__sucursal"></i style=>+541155693984</a>
+                        <p class="sucursal__horarios">Lun. a Vie. de 10 a 20:00hs</p>
+                        <p class="sucursal__horarios">Sab. de 10:30 a 15hs</p>
+                        <div class="ver__en__maps">
+                            <a class="maps__btn"
+                             target="_blank"
+                             href="https://www.google.com.ar/maps/place/Ar%C3%A1oz+2797,+C1425DGQ+CABA/@-34.5842628,-58.4148282,17z/data=!3m1!4b1!4m5!3m4!1s0x95bcb57e63f0d4a5:0x58c2d6c5cf667a03!8m2!3d-34.5842672!4d-58.4126395">
+                             Ver en Maps</a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="sucursal__text sucursal__text__3">
+                        <p><i class="fas fa-map-marker-alt"></i>Maipu 867 (Microcentro)</p>
+                        <p><i class="fas fa-phone"></i>4893-0999</p>
+                        <a class="whatsapp__sucursal" href="https://api.whatsapp.com/send?phone=393456789715"><i
+                            class="fab fa-whatsapp whatsapp__sucursal"></i style=>+541155693984</a>
+                        <p class="sucursal__horarios">Lun. a Vie. de 10 a 20:00hs</p>
+                        <p class="sucursal__horarios">Sab. de 10:30 a 15hs</p>
+                        <div class="ver__en__maps">
+                            <a class="maps__btn"
+                             target="_blank"
+                             href="https://www.google.com.ar/maps/place/Maip%C3%BA+867,+C1006ACK+CABA/@-34.5979838,-58.3789315,17z/data=!3m1!4b1!4m5!3m4!1s0x95bccaca2f87ab15:0xcf11488140c0c027!8m2!3d-34.5979882!4d-58.3767428">
+                             Ver en Maps</a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="sucursal__arrows">
+                            <i id="sucursal-arrow-left" class="sucursal__arrow fas fa-arrow-left"></i>
+                            <i id="sucursal-arrow-right" class="sucursal__arrow fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+    </section>-->
+
+    <div class="sucursal__container">
+        <h2 class="section-title">Nuestras Sucursales</h2>
+        <div class="carousel">
+            <div class="sucursal__overlay">
+                <div class="slider">
+                    <section>
+                        <div class="sucursal__text sucursal__text__1">
+                            <p><i class="fas fa-map-marker-alt"></i>Maipu 384 (Microcentro)</p>
+                            <p><i class="fas fa-phone"></i>5351-0890</p>
+                            <a class="whatsapp__sucursal" href="https://api.whatsapp.com/send?phone=393456789715"><i
+                                    class="fab fa-whatsapp whatsapp__sucursal"></i style=>+541155693984</a>
+                            <p class="sucursal__horarios">Lun. a Vie. de 10 a 19:00hs</p>
+                        </div>
+                            <div class="ver__en__maps">
+                                <a class="maps__btn" target="_blank"
+                                    href="https://www.google.com.ar/maps/place/Proviamo+Almacen+Gourmet/@-34.6036861,-58.3772599,19z/data=!4m5!3m4!1s0x95bccb8201a33eeb:0x372e937295fe10f2!8m2!3d-34.6037304!4d-58.3767179">
+                                    Ver en Maps</a>
+                            </div>
+                    </section>
+                    <section>
+                        <div class="sucursal__text sucursal__text__1">
+                            <p><i class="fas fa-map-marker-alt"></i>Maipu 867 (Microcentro)</p>
+                            <p><i class="fas fa-phone"></i>4893-0999</p>
+                            <a class="whatsapp__sucursal" href="https://api.whatsapp.com/send?phone=393456789715"><i
+                                    class="fab fa-whatsapp whatsapp__sucursal"></i style=>+541155693984</a>
+                            <p class="sucursal__horarios">Lun. a Vie. de 10 a 20:00hs</p>
+                            <p class="sucursal__horarios">Sab. de 10:30 a 15hs</p>
+                        </div>
+                            <div class="ver__en__maps">
+                                <a class="maps__btn" target="_blank"
+                                    href="https://www.google.com.ar/maps/place/Caba%C3%B1a+Don+Benjamin/@-34.5978511,-58.3808369,16z/data=!4m9!1m2!2m1!1sProviamo+Almacen+Gourmet!3m5!1s0x95bccaca2f843d11:0x5e91b21a4f79e39c!8m2!3d-34.598024!4d-58.3767879!15sChhQcm92aWFtbyBBbG1hY2VuIEdvdXJtZXRaGiIYcHJvdmlhbW8gYWxtYWNlbiBnb3VybWV0kgEOY29sZF9jdXRfc3RvcmU">
+                                    Ver en Maps</a>
+                            </div>
+                    </section>
+                    <section>
+                        <div class="sucursal__text sucursal__text__1">
+                            <p><i class="fas fa-map-marker-alt"></i>Araoz 2797 (Palermo)</p>
+                            <p><i class="fas fa-phone"></i>4836-4324</p>
+                            <p class="sucursal__horarios">Lun. a Vie. de 10 a 20:00hs</p>
+                            <p class="sucursal__horarios">Sab. de 10:30 a 20hs</p>
+                        </div>
+                            <div class="ver__en__maps">
+                                <a class="maps__btn" target="_blank"
+                                    href="https://www.google.com.ar/maps/place/Proviamo+Almacen+Gourmet/@-34.5842628,-58.4148282,17z/data=!4m13!1m7!3m6!1s0x95bcb57e63f0d4a5:0x58c2d6c5cf667a03!2sAr%C3%A1oz+2797,+C1425DGQ+CABA!3b1!8m2!3d-34.5842672!4d-58.4126395!3m4!1s0x95bcb5c5e096d38b:0x8cc90edb34225546!8m2!3d-34.5842672!4d-58.4126395">
+                                    Ver en Maps</a>
+                            </div>
+                    </section>
+                </div>
+                <div class="control">
+                    <span class="sucursal__arrow left">
+                        <i id="sucursal-arrow-left" class="sucursal__arrow fas fa-arrow-left"></i>
+                    </span>
+                    <span class="sucursal__arrow right">
+                        <i id="sucursal-arrow-right" class="fas fa-arrow-right"></i>
+                    </span>
+                    <ul>
+                        <li class="selected"></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--INFO-->
+
+    <section class="info section">
+        <h3 class="section-title">Contactanos</h3>
+        <div class="info__bar">
+
+            <div class="instagram">
+                <p><i class="fab fa-instagram"></i>Seguinos en Instagram</p>
+                <a href="https://www.instagram.com/proviamo.almacengourmet/" target="_blank"
+                    class="ig__btn">@proviamo.almacengourmet</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="shoppingCart" class="shopping-cart">
+        <div class="close__button d-flex">
+            <p class="back__to__shop">X</p>
+        </div>
+        <div>
+            <h1 class="text-center">Tus productos</h1>
+            <hr>
+            <!-- ? START SHOPPING CART ITEMS -->
+            <div class="shopping-cart-items shoppingCartItemsContainer">
+                <p class="empty__cart__text">Todavía no tenes productos en el carrito</p>
+            </div>
+            <!-- ? END SHOPPING CART ITEMS -->
+            <!-- START TOTAL -->
+            <div class="line">
+                <div class="total__section">
+                    <div class="shopping-cart-total d-flex align-items-center">
+                        <p class="mb-0 subtotal">Subtotal:&ensp;</p>
+                        <p class="ml-4 mb-0 shoppingCartTotal">$0</p>
+                    </div>
+                    <div class="shopping__cart__btns">
+                        <p class="ml-auto back__to__shop">Volver al Shop</p>
+                        <a id="button-checkout" href="#" class="btn btn-secondary-disabled ml-auto comprarButton"
+                           >FINALIZAR COMPRA</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="overlay"></div>
+
+    <!--FOOTER-->
+
+    <footer class="footer">
+        <div class="menu__footer">
+            <a href="index.html">Inicio</a>
+            <a href="shop.html">Productos</a>
+            <a href="aboutus.html">Sobre Nosotros</a>
+            <a href="contacto.html">Contactanos por eMail</a>
+            <a href="devoluciones.html">Política de Envíos y Devoluciones</a>
+        </div>
+        <div class="contact__footer">
+            <a href="https://api.whatsapp.com/send?phone=541155693984"><i class="fab fa-whatsapp"></i>+541155693984</a>
+            <p><i class="fas fa-map-marker-alt"></i>Maipu 867 (4893-0999) // Maipu 384 (5351-0890) // Araoz 2797
+                (4836-4324)</p>
+        </div>
+        <div class="cards__container">
+            <div class="cards">
+                <img src="img/Mercadopago-logo-1.png" alt="mercadopago">
+                <img src="img/visa-logo-1.png" alt="visa">
+                <img src="img/mastercard-logo-7.png" alt="mastercard">
+                <img src="img/amex.png" alt="amex">
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Api-->
+    <div id="wpp-logo" class="wpp__logo">
+        <a href="https://api.whatsapp.com/send?phone=541155693984"><img src="/img/whatsapp-logo-11.png" alt=""></a>
+    </div>
+    <div id="wpp-alert" class="wpp__alert">
+        <p>¡Hablá con nosotros!</p>
+    </div>
+
+
+    <div class="body-border-right"></div>
+    <div class="body-border-bottom"></div>
+    <div class="body-border-left"></div>
+
+    <div id="popup">
+        <h2 class="product__title__description"></h2>
+        <div class="product__description">
+            <p class="contenido__description"></p>
+
+            <p class="fiambres__description"></p>
+
+            <p class="quesos__description"></p>
+
+            <p class="extras__description">
+
+                ACEITUNAS - BERENJENAS -
+
+
+                NACHOS CON CHEDDAR - FRUTAS SECAS
+            </p>
+
+            <p class="pan__description">PAN INCLUIDO</p>
+        </div>
+        <a id="btn-close-popup" class="btn">Cerrar</a>
+    </div>
+</body>
+
+</html>

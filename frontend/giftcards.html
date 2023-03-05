@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Styles-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!--Icons-->
+    <script defer src="https://kit.fontawesome.com/b95ba2cf7a.js" crossorigin="anonymous"></script>
+    <!--Script-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+    <script defer src="js/fetch.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/shop.js"></script>
+    <!--<script defer src="js/checkout.js"></script>-->
+
+
+    <!--Title-->
+    <title>Almacen Gourmet</title>
+</head>
+
+<body>
+    <div id="blur">
+        <!--Header-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-grid">
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="fas fa-bars" id="grid-link"></i>
+                    <p class="menu__html">Menu</p>
+                </div>
+                <div class="nav__logo">
+                    <a href="/index.html"><img src="img/imgonline-com-ua-Negative-MUZq5lOZt9qIB1xp.jpg" alt="logo"></a>
+                </div>
+                <div class="nav__menu" id="nav-menu">
+                    <div class="close__button">
+                        <p id="remove-menu" class="back__to__shop">X</p>
+                    </div>
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html" class="nav__link">Inicio</a></li>
+                        <li class="nav__item arrow__li">
+                            <p id="arrow-button" class="arrow__nav__link">Productos <i
+                                    class="fas fa-long-arrow-alt-down"></i></p>
+                        </li>
+                        <ul class="nav__products__menu">
+
+                            <li class="products__menu__item">
+                                <a href="shop.html">Picadas</a>
+                            </li>
+                            <li class="products__menu__item">
+                                <a href="canastas.html">Cajas y Canastas</a>
+                            </li>
+                            <li class="products__menu__item">
+                                <a href="giftcards.html">Giftcards</a>
+                            </li>
+                            <li class="products__menu__item">
+                                <a href="importados.html">Importados</a>
+                            </li>
+                            <li class="products__menu__item">
+                                <a href="qatar.html">Promos Qatar 2022</a>
+                            </li>
+                        </ul>
+                        <li class="nav__item"><a href="reunion.html" class="nav__link">Armá tu reunion</a></li>
+                        <li class="nav__item"><a href="aboutus.html" class="nav__link">Sobre nosotros + Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="nav__shop" id="nav-shop">
+                    <p class="menu__html">Carrito</p>
+                    <i class="fas fa-shopping-bag" id="shoppingBag"></i>
+                    <p style="display: none;" id="shoppingBagNumber" class="cart__preview"></p>
+                </div>
+
+            </nav>
+            <div id="menu-overlay"></div>
+        </header>
+
+        <!-- HOME -->
+
+        <div class="shop__container">
+            <div class="e-shop" id="product-cards">
+                <div class="header__shop">
+                    <div class="banner__container giftcards__banner"></div>
+                    <div class="banner__overlay">
+                        <div class="titulo">
+                            <h1 id="giftcard-key">Giftcards</h1>
+                        </div>
+                    </div>
+                    <div id="filter-items" class="filter__input">
+                        <select class="filter__btn" name="filter" id="filter-button">
+                            <option class="filter-option mas-vendidos" selected value="masVendidos">Más Vendidos
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item__container">
+                    <div class='spinner-wrapper'>
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <section name="myForm" class="order-form my-4 mx-4 myForm"></section>
+
+            <section id="shoppingCart" class="shopping-cart">
+                <div class="close__button d-flex">
+                    <p class="back__to__shop">X</p>
+                </div>
+                <div>
+                    <h1 class="text-center">Tus productos</h1>
+                    <hr>
+                    <!-- ? START SHOPPING CART ITEMS -->
+                    <div class="shopping-cart-items shoppingCartItemsContainer">
+                        <p class="empty__cart__text">Todavía no tenes productos en el carrito</p>
+                    </div>
+                    <!-- ? END SHOPPING CART ITEMS -->
+                    <!-- START TOTAL -->
+                    <div class="line">
+                        <div class="total__section">
+                            <div class="shopping-cart-total d-flex align-items-center">
+                                <p class="mb-0 subtotal">Subtotal:&ensp;</p>
+                                <p class="ml-4 mb-0 shoppingCartTotal">$0</p>
+                            </div>
+                            <div class="shopping__cart__btns">
+                                <p class="ml-auto back__to__shop">Volver al Shop</p>
+                                <a id="button-checkout" href="#"
+                                    class="btn btn-secondary-disabled ml-auto comprarButton">FINALIZAR COMPRA</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div id="overlay"></div>
+
+        </div>
+
+
+        <!--FOOTER-->
+
+        <footer class="footer">
+            <div class="menu__footer">
+                <a href="index.html">Inicio</a>
+                <a href="shop.html">Productos</a>
+                <a href="aboutus.html">Sobre Nosotros</a>
+                <a href="contacto.html">Contactanos por eMail</a>
+                <a href="devoluciones.html">Política de Envíos y Devoluciones</a>
+            </div>
+            <div class="contact__footer">
+                <a href="https://api.whatsapp.com/send?phone=541155693984"><i
+                        class="fab fa-whatsapp"></i>+541155693984</a>
+                <p><i class="fas fa-map-marker-alt"></i>Maipu 867 (4893-0999) // Maipu 384 (5351-0890) // Araoz 2797
+                    (4836-4324)</p>
+            </div>
+            <div class="cards__container">
+                <div class="cards">
+                    <img src="img/Mercadopago-logo-1.png" alt="mercadopago">
+                    <img src="img/visa-logo-1.png" alt="visa">
+                    <img src="img/mastercard-logo-7.png" alt="mastercard">
+                    <img src="img/amex.png" alt="amex">
+                </div>
+            </div>
+        </footer>
+
+
+        <div class="body-border-right"></div>
+        <div class="body-border-bottom"></div>
+        <div class="body-border-left"></div>
+
+        <!-- WhatsApp Api-->
+        <div id="wpp-logo" class="wpp__logo">
+            <a href="https://api.whatsapp.com/send?phone=541155693984"><img src="/img/whatsapp-logo-11.png" alt=""></a>
+        </div>
+        <div id="wpp-alert" class="wpp__alert">
+            <p>¡Hablá con nosotros!</p>
+        </div>
+
+
+        <div class="body-border-right"></div>
+        <div class="body-border-bottom"></div>
+        <div class="body-border-left"></div>
+
+    </div>
+
+    <div id="popup">
+        <h2 class="product__title__description"></h2>
+        <div class="giftcard__description">
+            <p class="contenido__description">
+                Regalá algo rico
+            </p>
+            <p class="description">
+                Giftcard o tarjeta de regalo para canjear en productos en cualquiera de nuestras sucursales. La misma es digital, al momento de realizar la compra, te la envíamos por mail o por whatsapp dependiendo de tus preferencias indicadas en el formulario de compra y podes enviarla a la persona que quieras. Un "1" solo uso, sujeto a validación al momento de entrega.
+            </p>
+        </div>
+        <a id="btn-close-popup" class="btn">Cerrar</a>
+    </div>
+
+</body>
+
+</html>
