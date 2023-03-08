@@ -305,7 +305,7 @@ async function pay() {
 
   try {
     const preference = await (
-      await fetch("/api/pay", {
+      await fetch("/api/orders", {
         method: "post",
         body: JSON.stringify(order),
         headers: {

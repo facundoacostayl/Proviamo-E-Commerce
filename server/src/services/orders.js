@@ -1,6 +1,8 @@
 const { getProducts } = require("../services/products");
-const mercadopago = require("../config/mercadopago");
-const { sheets } = require("../config/oAuth2client");
+const mercadopago = require("../config/payway/mercadopago");
+const { sheets } = require("../config/db/oAuth2client");
+const { responseHandler } = require("../utils/response.handler");
+const { httpStatusCodes } = require("../utils/httpStatusCodes");
 
 const getOrders = async () => {
   const response = await sheets.spreadsheets.values.get({
@@ -18,7 +20,12 @@ const getOrders = async () => {
     status: row[4],
   }));
 
-  return orders;
+  return responseHandler(
+    "Success",
+    httpStatusCodes.OK,
+    "Orders found succesfully",
+    orders
+  );
 };
 
 const addOrders = async (order, preferenceId) => {
@@ -46,6 +53,13 @@ const addOrders = async (order, preferenceId) => {
     valueInputOption: "RAW",
     resource,
   });
+
+  return responseHandler(
+    "Success",
+    httpStatusCodes.OK,
+    "Order added succesfully",
+    values
+  );
 };
 
 const getOrderId = async (order) => {
@@ -55,9 +69,9 @@ const getOrderId = async (order) => {
   let preference = {
     items: [],
     back_urls: {
-      success: "http://localhost:3000/orders/feedback",
-      failure: "http://localhost:3000/orders/feedback",
-      pending: "http://localhost:3000/orders/feedback",
+      success: "http://localhost:3000/api/orders/feedback",
+      failure: "http://localhost:3000/api/orders/feedback",
+      pending: "http://localhost:3000/api/orders/feedback",
     },
     auto_return: "approved",
   };
@@ -73,7 +87,12 @@ const getOrderId = async (order) => {
 
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;
-  return preferenceId;
+  return responseHandler(
+    "Success",
+    httpStatusCodes.OK,
+    "Preference id found succesfully",
+    preferenceId
+  );
   /*order.date = new Date().toISOString();
   order.preferenceId = preferenceId;
   order.status = "Pendiente";
@@ -95,7 +114,7 @@ const getOrderStatus = async () => {
   const preferenceId = merchantOrder.body.preference_id;
   const status = payment.body.status;
 
-  return {preferenceId, status};
+  return { preferenceId, status };
 };
 
 module.exports = {

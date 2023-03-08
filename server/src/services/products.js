@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const { sheets } = require("../config/oAuth2client");
+const { sheets } = require("../config/db/oAuth2client");
 require("dotenv").config();
 
 const getProducts = async () => {
