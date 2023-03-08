@@ -15,6 +15,7 @@ const validShippingInfo = (req, res, next) => {
       postalCode,
       date,
       branch,
+      solicitaFactura,
       razonSocial,
       cuit,
       comments,
@@ -27,11 +28,39 @@ const validShippingInfo = (req, res, next) => {
     return /[^a-zA-Z\s]/g.test(name);
   };
 
+  //Function for validating loginEmail with regex
+  const validEmail = (email) => {
+    // eslint-disable-next-line
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  };
+
   //Requiring paths and validating body data
-  if (![tel, email, shippingType, date].every(Boolean)) {
-    return res.json("Completa los campos");
-  } else if (validName(firstName) || validName(lastName)) {
-    return res.status(401).json({ message: "Nombre o apellido inválido" });
+  if (![tel, email, shippingType].every(Boolean)) {
+    return res.json("Completa los campos requeridos");
+  } else if (!validEmail(email)) {
+    return res.json("Ingresa un email válido");
+  }
+
+  if (firstName || lastName) {
+    if (!validName(firstName) || !validName(lastName)) {
+      return res.status(401).json({ message: "Nombre o apellido inválido" });
+    }
+  }
+
+  if (shippingType === "Retira en sucursal") {
+    if (![date, branch].every(Boolean)) {
+      return res.json("Completa los datos de retiro");
+    }
+  }
+
+  if (shippingType === "Envío a domicilio") {
+    if (![date, addresLine, addresNumber, city, postalCode].every(Boolean))
+      return res.json("Completa los datos de envío");
+  }
+
+  if (solicitaFactura) {
+    if (![razonSocial, cuit].every(Boolean))
+      return res.json("Completa los datos de factura");
   }
 
   next();

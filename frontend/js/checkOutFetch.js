@@ -235,8 +235,11 @@ const goToBuy = () => {
   }
 
   if (facturaOption === "Solicita Factura A") {
+    order.shipping.solicitaFactura = true;
     order.shipping.razonSocial = document.getElementById("razonSocial").value;
     order.shipping.cuit = document.getElementById("cuit").value;
+  } else {
+    order.shipping.solicitaFactura = false;
   }
 
   if (textareafield) {
