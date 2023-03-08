@@ -62,7 +62,7 @@ const addOrders = async (order, preferenceId) => {
   );
 };
 
-const getOrderId = async (order) => {
+const getOrderProducts = async (order) => {
   const ids = order.items.map((p) => p.id);
   const productsCopy = await getProducts();
 
@@ -85,6 +85,15 @@ const getOrderId = async (order) => {
     });
   });
 
+  return responseHandler(
+    "Success",
+    200,
+    "Mercado Pago preference object created succesfully",
+    preference
+  );
+};
+
+const getOrderId = async (preference) => {
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;
   return responseHandler(
