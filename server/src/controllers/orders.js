@@ -3,7 +3,7 @@ const {
   addOrders,
   getOrderPreference,
   getOrderPreferenceId,
-  updateOrders,
+  updateOrderStatus,
   getOrderStatus,
 } = require("../services/orders");
 const { errorHandler } = require("../utils/error.handle");

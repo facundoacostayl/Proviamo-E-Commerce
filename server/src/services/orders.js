@@ -62,6 +62,29 @@ const addOrders = async (order, preferenceId) => {
   );
 };
 
+const updateOrders = async (orders) => {
+  const values = orders.map((order) => [
+    order.preferenceId,
+    JSON.stringify(order.finalOrder),
+    order.total,
+    JSON.stringify(order.shipping),
+    order.date,
+    order.status,
+  ]);
+
+  const resource = {
+    values,
+  };
+  const result = await sheets.spreadsheets.values.update({
+    spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
+    range: "Orders!A2:F",
+    valueInputOption: "RAW",
+    resource,
+  });
+
+  return responseHandler("Success", 200, "Order updated succesfully", result);
+};
+
 const getOrderPreference = async (order) => {
   const ids = order.items.map((p) => p.id);
   const productsCopy = await getProducts();
@@ -108,11 +131,17 @@ const getOrderPreferenceId = async (preference) => {
   const orders = await getOrders();*/
 };
 
-const updateOrders = async (preferenceId, status) => {
+const updateOrderStatus = async (preferenceId, status) => {
   const orders = await getOrders(); //CHECK THIS
   const order = orders.find((o) => o.preferenceId === preferenceId);
   order.status = status;
-  await writeOrders(orders);
+  const orderUpdated = await updateOrders(orders);
+  return responseHandler(
+    "Success",
+    200,
+    "Order Status updated succesfully",
+    orderUpdated
+  );
 };
 
 const getOrderStatus = async () => {
@@ -134,6 +163,6 @@ module.exports = {
   addOrders,
   getOrderPreference,
   getOrderPreferenceId,
-  updateOrders,
+  updateOrderStatus,
   getOrderStatus,
 };
