@@ -1,8 +1,8 @@
 const {
   getOrders,
   addOrders,
-  getOrderProducts,
-  getOrderId,
+  getOrderPreference,
+  getOrderPreferenceId,
   updateOrders,
   getOrderStatus,
 } = require("../services/orders");
@@ -16,10 +16,10 @@ const getItems = async (req, res) => {
 
 const addItems = async ({ body }, res) => {
   try {
-    const responseOrder = await getOrderProducts(body);
-    const responseId = await getOrderId(responseOrder);
-    await addOrders(body, response);
-    res.send({ response });
+    const responseOrder = await getOrderPreference(body);
+    const responseId = await getPreferenceOrderId(responseOrder);
+    const newOrder = await addOrders(body, responseId);
+    res.send(newOrder);
   } catch (e) {
     errorHandler(res, e.message, 400);
   }
@@ -28,7 +28,7 @@ const addItems = async ({ body }, res) => {
 const updateItems = async (req, res) => {
   try {
     const response = await getOrderStatus();
-    await updateOrders(response.preferenceId, response.status);
+    await updateOrders(response.data.preferenceId, response.data.status);
     res.sendFile(require.resolve("./frontend/index.html"));
   } catch (e) {
     errorHandler(res, e.message, 400);

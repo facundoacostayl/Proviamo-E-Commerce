@@ -62,7 +62,7 @@ const addOrders = async (order, preferenceId) => {
   );
 };
 
-const getOrderProducts = async (order) => {
+const getOrderPreference = async (order) => {
   const ids = order.items.map((p) => p.id);
   const productsCopy = await getProducts();
 
@@ -93,7 +93,7 @@ const getOrderProducts = async (order) => {
   );
 };
 
-const getOrderId = async (preference) => {
+const getOrderPreferenceId = async (preference) => {
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;
   return responseHandler(
@@ -109,7 +109,7 @@ const getOrderId = async (preference) => {
 };
 
 const updateOrders = async (preferenceId, status) => {
-  const orders = await readOrders();
+  const orders = await getOrders(); //CHECK THIS
   const order = orders.find((o) => o.preferenceId === preferenceId);
   order.status = status;
   await writeOrders(orders);
@@ -123,13 +123,17 @@ const getOrderStatus = async () => {
   const preferenceId = merchantOrder.body.preference_id;
   const status = payment.body.status;
 
-  return { preferenceId, status };
+  return responseHandler("Success", 200, "Order Status found succesfully", {
+    preferenceId,
+    status,
+  });
 };
 
 module.exports = {
   getOrders,
   addOrders,
-  getOrderId,
+  getOrderPreference,
+  getOrderPreferenceId,
   updateOrders,
   getOrderStatus,
 };
