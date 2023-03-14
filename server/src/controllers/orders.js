@@ -17,9 +17,9 @@ const getItems = async (req, res) => {
 const addItems = async ({ body }, res) => {
   try {
     const responseOrder = await getOrderPreference(body);
-    const responseId = await getPreferenceOrderId(responseOrder);
-    const newOrder = await addOrders(body, responseId);
-    res.send(newOrder);
+    const responseId = await getPreferenceOrderId(responseOrder.data);
+    const newOrder = await addOrders(body, responseId.data);
+    res.send(newOrder.data);
   } catch (e) {}
 };
 

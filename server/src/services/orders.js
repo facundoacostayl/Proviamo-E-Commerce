@@ -124,7 +124,7 @@ const getOrderPreference = async (order) => {
   };
 
   ids.forEach((id) => {
-    const product = productsCopy.find((p) => p.id === id);
+    const product = productsCopy.data.find((p) => p.id === id);
     preference.items.push({
       title: product.title,
       unit_price: product.price,
