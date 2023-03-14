@@ -10,7 +10,14 @@ const getOrders = async () => {
     range: "Orders!A2:E",
   });
 
-  //STRUGGLING HERE
+  if (!response) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Orders not found"
+    );
+  }
+
   const rows = response.data.values || [];
   const orders = rows.map((row) => ({
     preferenceId: row[0],
@@ -47,12 +54,20 @@ const addOrders = async (order, preferenceId) => {
     values,
   };
 
-  await sheets.spreadsheets.values.update({
+  const response = await sheets.spreadsheets.values.update({
     spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
     range: "Orders!A2:E",
     valueInputOption: "RAW",
     resource,
   });
+
+  if (!response) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Orders update error"
+    );
+  }
 
   return responseHandler(
     "Success",
@@ -75,14 +90,23 @@ const updateOrders = async (orders) => {
   const resource = {
     values,
   };
-  const result = await sheets.spreadsheets.values.update({
+
+  const response = await sheets.spreadsheets.values.update({
     spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
     range: "Orders!A2:F",
     valueInputOption: "RAW",
     resource,
   });
 
-  return responseHandler("Success", 200, "Order updated succesfully", result);
+  if (!response) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Orders update error"
+    );
+  }
+
+  return responseHandler("Success", 200, "Order updated succesfully", response);
 };
 
 const getOrderPreference = async (order) => {
@@ -118,6 +142,15 @@ const getOrderPreference = async (order) => {
 
 const getOrderPreferenceId = async (preference) => {
   const response = await mercadopago.preferences.create(preference);
+
+  if (!response) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Error creating Mercado Pago preference"
+    );
+  }
+
   const preferenceId = response.body.id;
   return responseHandler(
     "Success",
@@ -132,7 +165,7 @@ const getOrderPreferenceId = async (preference) => {
 };
 
 const updateOrderStatus = async (preferenceId, status) => {
-  const orders = await getOrders(); //CHECK THIS
+  const orders = await getOrders();
   const order = orders.find((o) => o.preferenceId === preferenceId);
   order.status = status;
   const orderUpdated = await updateOrders(orders);
@@ -146,9 +179,27 @@ const updateOrderStatus = async (preferenceId, status) => {
 
 const getOrderStatus = async () => {
   const payment = await mercadopago.payment.findById(req.query.payment_id);
+
+  if (!payment) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Error finding Mercado Pago payment"
+    );
+  }
+
   const merchantOrder = await mercadopago.merchant_orders.findById(
     payment.body.order.id
   );
+
+  if (!merchantOrder) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Error finding Mercado Pago merchant order"
+    );
+  }
+
   const preferenceId = merchantOrder.body.preference_id;
   const status = payment.body.status;
 
