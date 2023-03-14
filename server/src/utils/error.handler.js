@@ -19,4 +19,4 @@ const throwErrorWithStatus = (response) => {
   throw error;
 };
 
-module.exports = { ErrorWithStatus, throwErrorWithStatus };
+module.exports = { throwErrorWithStatus };

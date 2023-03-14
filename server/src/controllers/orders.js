@@ -6,7 +6,7 @@ const {
   updateOrderStatus,
   getOrderStatus,
 } = require("../services/orders");
-const { errorHandler } = require("../utils/error.handle");
+const { throwErrorWithStatus } = require("../utils/error.handler");
 
 const getItems = async (req, res) => {
   const response = await getOrders();
@@ -20,9 +20,7 @@ const addItems = async ({ body }, res) => {
     const responseId = await getPreferenceOrderId(responseOrder);
     const newOrder = await addOrders(body, responseId);
     res.send(newOrder);
-  } catch (e) {
-    errorHandler(res, e.message, 400);
-  }
+  } catch (e) {}
 };
 
 const updateItems = async (req, res) => {
@@ -30,9 +28,7 @@ const updateItems = async (req, res) => {
     const response = await getOrderStatus();
     await updateOrders(response.data.preferenceId, response.data.status);
     res.sendFile(require.resolve("./frontend/index.html"));
-  } catch (e) {
-    errorHandler(res, e.message, 400);
-  }
+  } catch (e) {}
 };
 
 const updateItemById = async (req, res) => {
@@ -42,9 +38,7 @@ const updateItemById = async (req, res) => {
     const order = orders.find((o) => o.preferenceId === response.preferenceId);
     order.status = response.status;
     await writeOrders(orders);
-  } catch (e) {
-    errorHandler(res, e.message, 400);
-  }
+  } catch (e) {}
 };
 
 module.exports = { getItems, addItems, updateItems };
