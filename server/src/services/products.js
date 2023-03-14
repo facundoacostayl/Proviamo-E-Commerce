@@ -1,5 +1,6 @@
-const { google } = require("googleapis");
 const { sheets } = require("../config/db/oAuth2client");
+const { httpStatusCodes } = require("../utils/httpStatusCodes");
+const { responseHandler } = require("../utils/response.handler");
 require("dotenv").config();
 
 const getProducts = async () => {
@@ -7,6 +8,15 @@ const getProducts = async () => {
     spreadsheetId: process.env.ID_GSPREADSHEETS,
     range: "Productos!A2:I",
   });
+
+  if (!response) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Error getting products"
+    );
+  }
+
   const rows = response.data.values;
   const products = rows.map((row) => ({
     id: +row[0],
@@ -20,7 +30,12 @@ const getProducts = async () => {
     quesos: row[8],
   }));
 
-  return products;
+  return responseHandler(
+    "Success",
+    httpStatusCodes.OK,
+    "Get products succesfully",
+    products
+  );
 };
 
 const addProducts = async (products) => {
@@ -46,6 +61,21 @@ const addProducts = async (products) => {
     valueInputOption: "RAW",
     resource,
   });
+
+  if (!result) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Error updating products"
+    );
+  }
+
+  return responseHandler(
+    "Success",
+    httpStatusCodes.OK,
+    "Update products succesfully",
+    result
+  );
 };
 
 module.exports = { getProducts, addProducts };
