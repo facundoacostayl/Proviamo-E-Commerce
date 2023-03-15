@@ -36,10 +36,22 @@ const getOrders = async () => {
 };
 
 const addOrders = async (order, preferenceId) => {
+  const orders = await sheets.spreadsheets.values.get({
+    spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
+    range: "Orders!A2:E",
+  });
+
+  if (!orders) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Orders not found"
+    );
+  }
+
   order.date = new Date().toISOString();
   order.preferenceId = preferenceId;
   order.status = "Pendiente";
-  const orders = await getOrders();
   orders.push(order.items);
 
   let values = orders.map((order) => [
