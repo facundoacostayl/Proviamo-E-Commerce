@@ -36,12 +36,9 @@ const getOrders = async () => {
 };
 
 const addOrders = async (order, preferenceId) => {
-  const orders = await sheets.spreadsheets.values.get({
-    spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
-    range: "Orders!A2:E",
-  });
+  const orders = await getOrders();
 
-  if (!orders) {
+  if (!orders.data) {
     return responseHandler(
       "Error",
       httpStatusCodes.BAD_REQUEST,
@@ -49,12 +46,15 @@ const addOrders = async (order, preferenceId) => {
     );
   }
 
+  const ordersData = orders.data;
+
   order.date = new Date().toISOString();
   order.preferenceId = preferenceId;
   order.status = "Pendiente";
-  orders.push(order.items);
 
-  let values = orders.map((order) => [
+  ordersData.push(order.items);
+
+  let values = ordersData.map((order) => [
     order.preferenceId,
     JSON.stringify(order.items),
     JSON.stringify(order.shipping),
@@ -122,8 +122,17 @@ const updateOrders = async (orders) => {
 };
 
 const getOrderPreference = async (order) => {
-  const ids = order.items.map((p) => p.id);
   const productsCopy = await getProducts();
+
+  if (!productsCopy.data) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Get products error"
+    );
+  }
+
+  const ids = order.items.map((p) => p.id);
 
   let preference = {
     items: [],
@@ -178,9 +187,36 @@ const getOrderPreferenceId = async (preference) => {
 
 const updateOrderStatus = async (preferenceId, status) => {
   const orders = await getOrders();
-  const order = orders.find((o) => o.preferenceId === preferenceId);
-  order.status = status;
-  const orderUpdated = await updateOrders(orders);
+
+  if (!orders.data) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Get products error"
+    );
+  }
+
+  const ordersData = orders.data;
+
+  const orderToUpdate = ordersData.find((o) => o.preferenceId === preferenceId);
+  const orderToUpdateIndex = ordersData.findIndex(
+    (o) => o.preferenceId === preferenceId
+  );
+
+  orderToUpdate.status = status;
+  ordersData[orderToUpdateIndex] = orderToUpdate;
+
+  const newOrders = ordersData.push(orderToUpdate);
+  const orderUpdated = await updateOrders(newOrders);
+
+  if (!orderUpdated.data) {
+    return responseHandler(
+      "Error",
+      httpStatusCodes.BAD_REQUEST,
+      "Update orders error"
+    );
+  }
+
   return responseHandler(
     "Success",
     200,
