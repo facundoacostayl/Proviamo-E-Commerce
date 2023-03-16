@@ -9,9 +9,14 @@ const {
 const { throwErrorWithStatus } = require("../utils/error.handler");
 
 const getItems = async (req, res) => {
-  const response = await getOrders();
+  try {
+    const response = await getOrders();
+    if (response.responseType === "Error") throwErrorWithStatus(response);
 
-  res.send(response);
+    res.send(response);
+  } catch (e) {
+    res.status(e.statusCode).send(e.message);
+  }
 };
 
 const addItems = async ({ body }, res) => {
