@@ -32,10 +32,20 @@ const addItems = async ({ body }, res) => {
 
 const updateItems = async (req, res) => {
   try {
-    const response = await getOrderStatus();
-    await updateOrders(response.data.preferenceId, response.data.status);
+    const responseStatus = await getOrderStatus();
+    if (responseStatus.responseType === "Error")
+      throwErrorWithStatus(responseStatus);
+    const responseUpdate = await updateOrders(
+      responseStatus.data.preferenceId,
+      responseStatus.data.status
+    );
+    if (responseUpdate.responseType === "Error")
+      throwErrorWithStatus(responseUpdate);
+
     res.sendFile(require.resolve("./frontend/index.html"));
-  } catch (e) {}
+  } catch (e) {
+    res.status(e.statusCode).send(e.message);
+  }
 };
 
 const updateItemById = async (req, res) => {
