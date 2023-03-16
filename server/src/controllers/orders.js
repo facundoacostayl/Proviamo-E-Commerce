@@ -17,10 +17,17 @@ const getItems = async (req, res) => {
 const addItems = async ({ body }, res) => {
   try {
     const responseOrder = await getOrderPreference(body);
+    if (responseOrder.responseType === "Error")
+      throwErrorWithStatus(responseOrder);
     const responseId = await getPreferenceOrderId(responseOrder.data);
+    if (responseId.responseType === "Error") throwErrorWithStatus(responseId);
     const newOrder = await addOrders(body, responseId.data);
-    res.send(newOrder.data);
-  } catch (e) {}
+    if (newOrder.responseType === "Error") throwErrorWithStatus(newOrder);
+
+    res.send(newOrder);
+  } catch (e) {
+    res.status(e.statusCode).send(e.message);
+  }
 };
 
 const updateItems = async (req, res) => {
