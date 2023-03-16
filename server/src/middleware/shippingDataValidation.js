@@ -41,23 +41,27 @@ const validShippingInfo = (req, res, next) => {
     return res.json("Ingresa un email válido");
   }
 
+  //IF FIRSTNAME OR LASTNAME EXISTS, VALIDATE THEM
   if (firstName || lastName) {
     if (!validName(firstName) || !validName(lastName)) {
       return res.status(401).json({ message: "Nombre o apellido inválido" });
     }
   }
 
+  //VALIDATE "Retira en sucursal" if it was selected
   if (shippingType === "Retira en sucursal") {
     if (![date, branch].every(Boolean)) {
       return res.json("Completa los datos de retiro");
     }
   }
 
+  //VALIDATE "Envio a domicilio" if it was selected
   if (shippingType === "Envío a domicilio") {
     if (![date, addresLine, addresNumber, city, postalCode].every(Boolean))
       return res.json("Completa los datos de envío");
   }
 
+  //VALIDATE "solicitaFactura" if it was selected
   if (solicitaFactura) {
     if (![razonSocial, cuit].every(Boolean))
       return res.json("Completa los datos de factura");

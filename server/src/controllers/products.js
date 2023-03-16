@@ -3,7 +3,10 @@ const { getProducts, addProducts } = require("../services/products");
 
 const getItems = async (req, res) => {
   try {
+    //GET Products
     const response = await getProducts();
+
+    //CHECK if response returns error and throw error if it does
     if (response.responseType === "Error") throwErrorWithStatus(response);
 
     res.send(response);
