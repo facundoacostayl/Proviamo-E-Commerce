@@ -40,9 +40,7 @@ const addItems = async ({ body }, res) => {
     //CHECK if newOrder returns error and throw error if it does
     if (newOrder.responseType === "Error") throwErrorWithStatus(newOrder);
 
-    console.log(newOrder.data);
-
-    return res.send(newOrder.data);
+    return res.send({ preferenceId: responseId });
   } catch (e) {
     res.status(e.statusCode || 400).json({ message: e.message });
   }

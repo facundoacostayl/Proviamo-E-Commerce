@@ -37,7 +37,7 @@ const validShippingInfo = (req, res, next) => {
   //Requiring paths and validating body data
   if (![tel, email, shippingType].every(Boolean)) {
     return res.json("Completa los campos requeridos");
-  } else if (validEmail(email)) {
+  } else if (!validEmail(email)) {
     return res.json("Ingresa un email válido");
   }
 

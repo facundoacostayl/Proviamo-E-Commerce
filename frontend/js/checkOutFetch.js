@@ -320,6 +320,8 @@ async function pay() {
         console.log(rejected);
       });
 
+    console.log(preference);
+
     var script = document.createElement("script");
 
     // The source domain must be completed according to the site for which you are integrating.
