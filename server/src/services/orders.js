@@ -64,7 +64,7 @@ const addOrders = async (order, preferenceId) => {
   order.status = "Pendiente";
 
   //PUSH items from orders into ordersData
-  ordersData.push(order.items);
+  ordersData.push(order);
 
   //Create a new array with updated ordersData values
   let values = ordersData.map((order) => [
