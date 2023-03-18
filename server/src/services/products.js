@@ -6,7 +6,7 @@ require("dotenv").config();
 const getProducts = async () => {
   //GET Products from DB
   const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.ID_GSPREADSHEETS,
+    spreadsheetId: process.env.ID_PRODUCTS_GSPREADSHEETS,
     range: "Productos!A2:I",
   });
 
@@ -64,7 +64,7 @@ const addProducts = async (products) => {
 
   //UPDATE DB inserting resource object
   const result = await sheets.spreadsheets.values.update({
-    spreadsheetId: process.env.ID_GSPREADSHEETS,
+    spreadsheetId: process.env.ID_PRODUCTS_GSPREADSHEETS,
     range: "Productos!A2:I",
     valueInputOption: "RAW",
     resource,

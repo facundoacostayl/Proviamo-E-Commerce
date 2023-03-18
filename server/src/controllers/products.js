@@ -9,9 +9,9 @@ const getItems = async (req, res) => {
     //CHECK if response returns error and throw error if it does
     if (response.responseType === "Error") throwErrorWithStatus(response);
 
-    res.send(response);
+    return res.status(response.statusCode).send(response);
   } catch (e) {
-    res.status(e.statusCode).send(e.message);
+    res.status(e.statusCode || 401).json({ message: e.message });
   }
 };
 

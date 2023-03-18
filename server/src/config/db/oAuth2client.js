@@ -1,7 +1,11 @@
 const { google } = require("googleapis");
 require("dotenv").config();
 
-const oAuth2Client = new google.auth.OAuth2(process.env.ID_OAUTH2CLIENT);
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.ID_OAUTH2CLIENT_1,
+  process.env.ID_OAUTH2CLIENT_2,
+  process.env.ID_OAUTH2CLIENT_3
+);
 
 oAuth2Client.setCredentials({
   access_token: process.env.ACCESS_TOKEN_OAUTH2,
