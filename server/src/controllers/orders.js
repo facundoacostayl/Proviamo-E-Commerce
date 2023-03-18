@@ -32,7 +32,8 @@ const addItems = async ({ body }, res) => {
     //GET ORDER PREFERENCE ID
     const responseId = await getOrderPreferenceId(responseOrder.data);
     //CHECK if responseId returns error and throw error if it does
-    if (responseId.responseType === "Error") throwErrorWithStatus(responseId);
+    if (responseId.responseType === "Error")
+      throwErrorWithStatus(responseId.data);
     //ADD orders to orders list
     const newOrder = await addOrders(body, responseId.data);
     //CHECK if newOrder returns error and throw error if it does
