@@ -320,16 +320,16 @@ async function pay() {
         console.log(rejected);
       });
 
-    console.log(preference);
-
     var script = document.createElement("script");
+
+    const preferenceId = preference.preferenceId.data;
 
     // The source domain must be completed according to the site for which you are integrating.
     // For example: for Argentina ".com.ar" or for Brazil ".com.br".
     script.src =
       "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
     script.type = "text/javascript";
-    script.dataset.preferenceId = preference.preferenceId;
+    script.dataset.preferenceId = preferenceId;
     document.getElementById("button-checkout").innerHTML = "";
     document.querySelector("#button-checkout").appendChild(script);
   } catch (e) {
