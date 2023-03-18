@@ -11,7 +11,7 @@ const getItems = async (req, res) => {
 
     return res.status(response.statusCode).send(response);
   } catch (e) {
-    res.status(e.statusCode || 401).json({ message: e.message });
+    res.status(e.statusCode || 400).json({ message: e.message });
   }
 };
 

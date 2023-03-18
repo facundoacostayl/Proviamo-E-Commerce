@@ -16,9 +16,9 @@ const getItems = async (req, res) => {
     //CHECK if response returns error and throw error if it does
     if (response.responseType === "Error") throwErrorWithStatus(response);
 
-    res.send(response);
+    return res.send(response);
   } catch (e) {
-    res.status(e.statusCode).send(e.message);
+    res.status(e.statusCode || 400).json({ message: e.message });
   }
 };
 
@@ -38,9 +38,9 @@ const addItems = async ({ body }, res) => {
     //CHECK if newOrder returns error and throw error if it does
     if (newOrder.responseType === "Error") throwErrorWithStatus(newOrder);
 
-    res.send(newOrder);
+    return res.send(newOrder);
   } catch (e) {
-    res.status(e.statusCode).send(e.message);
+    res.status(e.statusCode || 400).json({ message: e.message });
   }
 };
 
@@ -61,9 +61,9 @@ const updateItems = async (req, res) => {
       throwErrorWithStatus(responseUpdate);
 
     //RESOLVE to frontend
-    res.sendFile(require.resolve("./frontend/index.html"));
+    return res.sendFile(require.resolve("./frontend/index.html"));
   } catch (e) {
-    res.status(e.statusCode).send(e.message);
+    res.status(e.statusCode || 400).json({ message: e.message });
   }
 };
 
