@@ -8,7 +8,7 @@ const getOrders = async () => {
   //GET Orders from DB
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
-    range: "Orders!A2:E",
+    range: "Orders!A2:F",
   });
 
   //CHECK if orders exists, otherwise return error
@@ -27,9 +27,10 @@ const getOrders = async () => {
   const orders = rows.map((row) => ({
     preferenceId: row[0],
     items: JSON.parse(row[1]),
-    shipping: JSON.parse(row[2]),
-    date: row[3],
-    status: row[4],
+    total: +row[2],
+    shipping: JSON.parse(row[3]),
+    date: row[4],
+    status: row[5],
   }));
 
   return responseHandler(
@@ -53,6 +54,8 @@ const addOrders = async (order, preferenceId) => {
     );
   }
 
+  console.log(orders.data);
+
   //GET orders data from orders
   const ordersData = orders.data;
 
@@ -70,6 +73,7 @@ const addOrders = async (order, preferenceId) => {
   let values = ordersData.map((order) => [
     order.preferenceId,
     JSON.stringify(order.items),
+    order.total,
     JSON.stringify(order.shipping),
     order.date,
     order.status,
@@ -83,7 +87,7 @@ const addOrders = async (order, preferenceId) => {
   //UPDATE DB inserting resource object
   const result = await sheets.spreadsheets.values.update({
     spreadsheetId: "1csLKz4P6rmXNs633SgqAF3Gn6ktb8B6Y4zbOD7sYA84",
-    range: "Orders!A2:E",
+    range: "Orders!A2:F",
     valueInputOption: "RAW",
     resource,
   });
