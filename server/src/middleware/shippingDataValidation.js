@@ -37,13 +37,13 @@ const validShippingInfo = (req, res, next) => {
   //Requiring paths and validating body data
   if (![tel, email, shippingType].every(Boolean)) {
     return res.json("Completa los campos requeridos");
-  } else if (!validEmail(email)) {
+  } else if (validEmail(email)) {
     return res.json("Ingresa un email válido");
   }
 
   //IF FIRSTNAME OR LASTNAME EXISTS, VALIDATE THEM
   if (firstName || lastName) {
-    if (!validName(firstName) || !validName(lastName)) {
+    if (validName(firstName) || validName(lastName)) {
       return res.status(401).json({ message: "Nombre o apellido inválido" });
     }
   }

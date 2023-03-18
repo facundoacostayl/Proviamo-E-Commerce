@@ -303,6 +303,8 @@ async function pay() {
 
   order.total = cont;
 
+  console.log(JSON.stringify(order));
+
   try {
     const preference = await (
       await fetch("/api/orders", {
