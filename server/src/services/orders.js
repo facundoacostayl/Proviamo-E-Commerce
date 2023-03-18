@@ -54,8 +54,6 @@ const addOrders = async (order, preferenceId) => {
     );
   }
 
-  console.log(orders.data);
-
   //GET orders data from orders
   const ordersData = orders.data;
 
@@ -101,11 +99,14 @@ const addOrders = async (order, preferenceId) => {
     );
   }
 
+  const currentUpdatedOrderIndex = values.length - 1;
+  const currentUpdatedOrder = values[currentUpdatedOrderIndex];
+
   return responseHandler(
     "Success",
     httpStatusCodes.OK,
     "Order added succesfully",
-    values
+    currentUpdatedOrder
   );
 };
 
