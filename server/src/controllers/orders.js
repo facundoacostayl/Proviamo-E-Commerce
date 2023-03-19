@@ -63,7 +63,7 @@ const updateItems = async (req, res) => {
       throwErrorWithStatus(responseUpdate);
 
     //RESOLVE to frontend
-    return res.sendFile(require.resolve("./frontend/index.html"));
+    return res.sendFile(require.resolve("../frontend/index.html"));
   } catch (e) {
     res.status(e.statusCode || 400).json({ message: e.message });
   }
