@@ -49,12 +49,12 @@ const addItems = async ({ body }, res) => {
 const updateItems = async (req, res) => {
   try {
     //GET order status
-    const responseStatus = await getOrderStatus();
+    const responseStatus = await getOrderStatus(req.query.payment_id);
     //CHECK if responseStatus returns error and throw error if it does
     if (responseStatus.responseType === "Error")
       throwErrorWithStatus(responseStatus);
     //UPDATE orders using responseStatus data
-    const responseUpdate = await updateOrders(
+    const responseUpdate = await updateOrderStatus(
       responseStatus.data.preferenceId,
       responseStatus.data.status
     );

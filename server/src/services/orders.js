@@ -240,12 +240,12 @@ const updateOrderStatus = async (preferenceId, status) => {
 
   //UPDATE order to be updated status value with status argument
   orderToUpdate.status = status;
+
   //UPDATE ordersData to be orderToUpdate
   ordersData[orderToUpdateIndex] = orderToUpdate;
-  //PUSH orderToUpdate into ordersData
-  const newOrders = ordersData.push(orderToUpdate);
+
   //UPDATE orders from DB with updateOrders function
-  const orderUpdated = await updateOrders(newOrders);
+  const orderUpdated = await updateOrders(ordersData);
 
   //CHECK if orderUpdated went ok, otherwise return
   if (!orderUpdated.data) {
@@ -264,9 +264,9 @@ const updateOrderStatus = async (preferenceId, status) => {
   );
 };
 
-const getOrderStatus = async () => {
+const getOrderStatus = async (paymentQuery) => {
   //GET payment id from Mercado Pago
-  const payment = await mercadopago.payment.findById(req.query.payment_id);
+  const payment = await mercadopago.payment.findById(paymentQuery);
 
   //CHECK if payment exists, otherwise return
   if (!payment) {
