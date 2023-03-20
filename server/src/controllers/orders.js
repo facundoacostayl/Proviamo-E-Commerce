@@ -62,8 +62,8 @@ const updateItems = async (req, res) => {
     if (responseUpdate.responseType === "Error")
       throwErrorWithStatus(responseUpdate);
 
-    //RESOLVE to frontend
-    return res.sendFile(require.resolve("../frontend/index.html"));
+    //Redirect to frontend
+    return res.redirect("/");
   } catch (e) {
     res.status(e.statusCode || 400).json({ message: e.message });
   }
